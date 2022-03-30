@@ -1,17 +1,57 @@
+.wmodal {}
+
+/*показать окно*/
+.wmodal.open .modal-overlay,
+.wmodal.open .modal-window {
+    opacity: 1;
+    z-index: 1000;
+}
+
+.wmodal.hide .modal-overlay,
+.wmodal.hide .modal-window {
+    opacity: 1;
+    z-index: 1000;
+}
+
+.wmodal.open .modal-window {
+    transform: translateY(100px); /*если есть класс open, то перемещение на 100px */
+}
+
+.wmodal.open .modal-overlay {
+    background: rgba(0, 0, 0, .5);
+}
+
+.wmodal.hide .modal-window {
+    transform: translateY(-200px); /*если есть класс open, то перемещение на 100px */
+}
+
+.wmodal.hide .modal-overlay {
+    background: rgba(0, 0, 0, 0);
+}
+
+/*скрыть элементы*/
+.modal-window, .modal-overlay {
+    opacity: 0;
+    z-index: -1;
+}
+
 .modal-overlay {
     position: fixed;
     top: 0;
     right: 0;
     left: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, .5);
-}
+    background: rgba(0, 0, 0, 0);
+    transition: background .2s ease-in;
+} 
 
 .modal-window {
     width: 600px;
     border-radius: 5px;
     background: #fff;
-    margin: 100px auto;
+    margin: 0 auto;
+    transform: translateY(-200px); /*по умолчанию элемент находится вне экрана*/
+    transition: transform .2s ea;
 }
 
 .modal-header {
