@@ -1,4 +1,4 @@
-fruits = [
+let fruits = [
     {id: 1, title: 'Яблоки', price: 100, img: 'https://images.pexels.com/photos/4399942/pexels-photo-4399942.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'},
     {id: 2, title: 'Апельсины', price: 150, img: 'https://images.pexels.com/photos/5689628/pexels-photo-5689628.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'},
     {id: 3, title: 'Манго', price: 400, img: 'https://images.pexels.com/photos/7543212/pexels-photo-7543212.jpeg?auto=compress&cs=tinysrgb&h=750&w=12600'},
@@ -36,20 +36,6 @@ const priceModal = $.modal({
     ]
 })
 
-const confirmModal = $.modal({
-    title: 'Вы уверены?',
-    closable: true,
-    width: '400px',
-    footerButtons: [
-        {text: 'Отменить', type: 'secondary', handler() {
-            priceModal.close() //закрытие окна
-        }}, 
-        {text: 'Удалить', type: 'danger', handler() {
-            priceModal.close() //закрытие окна
-        }}
-    ]
-})
-
 document.addEventListener('click', evt => {
     evt.preventDefault() //удаление хэша # по ссылке
     const btnType = evt.target.dataset.btn //элемент содержащий data атрибут btn (т.e. data-btn)
@@ -62,9 +48,15 @@ document.addEventListener('click', evt => {
         `)
         priceModal.open()
     } else if (btnType === 'remove') {
-        confirmModal.setContent(`
-            <p>Вы удаляете <strong>${fruit.title}</strong></p>
-        `)
-        confirmModal.open()
+        $.confirm({
+            title: 'Вы уверены?',
+            content: `<p>Вы удаляете <strong>${fruit.title}</strong></p>`
+        }).then(() => {
+            //удаление элемента
+            fruits = fruits.filter(f => f.id !== id)
+            render()
+        }).catch(() => {
+            console.log('отменить')
+        })
     }
 })
