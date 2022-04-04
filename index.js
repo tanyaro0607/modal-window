@@ -1,3 +1,9 @@
+fruits = [
+    {id: 1, title: 'Яблоки', price: 20, img: 'https://images.pexels.com/photos/4399942/pexels-photo-4399942.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'},
+    {id: 1, title: 'Апельсины', price: 30, img: 'https://images.pexels.com/photos/5689628/pexels-photo-5689628.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260'},
+    {id: 1, title: 'Манго', price: 40, img: 'https://images.pexels.com/photos/7543212/pexels-photo-7543212.jpeg?auto=compress&cs=tinysrgb&h=750&w=12600'},
+]
+
 const modal = $.modal({
     title: 'Tatiana Modal',
     closable: true,
