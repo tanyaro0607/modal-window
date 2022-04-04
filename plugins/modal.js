@@ -31,6 +31,9 @@ $.modal = function(options) {
 
     const modal = {
         open() {
+            if (destroyed) {
+                return console.log('modal is destroyed')
+            }
             //если окно закрыто, то доб. класс open
            !closing && $modal.classList.add('open')
         },
@@ -46,15 +49,18 @@ $.modal = function(options) {
         },
     }
 
-    $modal.addEventListener('click', evt => {
+    const listener = evt => {
         if (evt.target.dataset.close) {
             modal.close()
         }
-    })
+    }
+
+    $modal.addEventListener('click', listener)
 
     return Object.assign(modal, {
         destroy() {
             $modal.parentNode.removeChild($modal) //удаление node из dom-дерева
+            $modal.removeEventListener('click', listener)
             destroyed = true
         }
     })
